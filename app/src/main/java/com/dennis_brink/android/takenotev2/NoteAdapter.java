@@ -14,6 +14,7 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private List<Note> notes = new ArrayList<>();
+    private onItemClickListener listener;
 
     @NonNull
     @Override
@@ -41,6 +42,19 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         notifyDataSetChanged(); // this will give a signal if anything changed
     }
 
+    public Note getNotes(int position){
+        return notes.get(position); //return the note from position in notes array
+    }
+
+    // click listener interface for recyclerview
+    public interface onItemClickListener{
+        void onItemClick(Note note);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener){
+        this.listener = listener;
+    }
+
     // create this inner class first before you click 'implement methods' in order to create the overridden methods
     // like they are now. If you don't they will not be created like this
     class NoteHolder extends RecyclerView.ViewHolder{
@@ -51,6 +65,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(notes.get(position));
+                    }
+                }
+            });
+
 
         }
     }

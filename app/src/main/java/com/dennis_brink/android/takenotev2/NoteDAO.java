@@ -27,6 +27,6 @@ public interface NoteDAO {
     // LiveData<> will ensure that any change will be directly forwarded to the UI (=listener)
     // Room will detect any SQL errors at compile time (as opposed to runtime)
     @Query("SELECT * FROM note ORDER BY id ASC")
-    LiveData<List<Note>> getAllNotes();
+    LiveData<List<Note>> getAllNotesById();
 
 }

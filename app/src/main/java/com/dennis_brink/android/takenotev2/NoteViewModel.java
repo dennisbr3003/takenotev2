@@ -1,6 +1,7 @@
 package com.dennis_brink.android.takenotev2;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,7 +18,7 @@ public class NoteViewModel extends AndroidViewModel {
         super(application);
 
         repository = new NoteRepository(application);
-        notes = repository.getAllNotes();
+        //notes = repository.getAllNotesById();
 
     }
 
@@ -33,8 +34,9 @@ public class NoteViewModel extends AndroidViewModel {
         repository.delete(note);
     }
 
-    public LiveData<List<Note>> getAllNotes(){
-        return repository.getAllNotes();
+    public LiveData<List<Note>> getAllNotesById(){
+        Log.d("DENNIS_B", "NoteViewModel:getAllNotesById executed");
+        return repository.getAllNotesById();
     }
 
 }

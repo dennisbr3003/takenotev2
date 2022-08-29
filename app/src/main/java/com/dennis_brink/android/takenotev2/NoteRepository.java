@@ -2,6 +2,8 @@ package com.dennis_brink.android.takenotev2;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.AdapterView;
 
 import androidx.lifecycle.LiveData;
 
@@ -14,12 +16,13 @@ public class NoteRepository {
     private NoteDAO noteDAO;
     private LiveData<List<Note>> notes;
 
+
     ExecutorService executors = Executors.newSingleThreadExecutor();
 
     public NoteRepository(Application application){
         NoteDatabase db = NoteDatabase.getInstance(application);
         noteDAO = db.noteDAO(); // Room added this method so we can call it
-        notes = noteDAO.getAllNotes(); // we did define this (the SQL query) so the List object will be filled
+        // notes = noteDAO.getAllNotesById(); // we did define this (the SQL query) so the List object will be filled
     }
 
     // database operations are not allowed on the main thread for the operation may lock the UI for a long time
@@ -57,9 +60,12 @@ public class NoteRepository {
         });
     }
 
-    public LiveData<List<Note>> getAllNotes(){
-        return notes;
+    public LiveData<List<Note>> getAllNotesById(){
+        // return notes;
+        Log.d("DENNIS_B", "NoteRepository:getAllNotesById executed");
+        return noteDAO.getAllNotesById();
     }
+
 /*
     private static class InsertNoteAsyncTask extends AsyncTask<Note, Void, Void>{
 

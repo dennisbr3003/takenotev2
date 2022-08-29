@@ -50,7 +50,6 @@ public abstract class NoteDatabase extends RoomDatabase {
                     noteDAO.insert(new Note("Note 2", "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur commodi nobis aperiam nesciunt necessitatibus."));
                     noteDAO.insert(new Note("Note 3", "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore provident perspiciatis labore"));
                     noteDAO.insert(new Note("Note 4", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tempora cum maiores nemo vitae voluptatum sequi fugit libero beatae quod."));
-                    noteDAO.insert(new Note("Note 5", "Deze wil ik niet zien, dan klopt het wat ik denk"));
                 }
             });
 
