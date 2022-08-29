@@ -31,6 +31,7 @@ import java.util.List;
 // -- Maybe save a date created and a date updated
 // -- security (password/pin/photo points)
 // -- add note should be a fab (with image mounted like in math thingy)
+// -- icons and design
 
 public class MainActivity extends AppCompatActivity {
 
