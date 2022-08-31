@@ -22,7 +22,8 @@ public class NoteRepository {
     public NoteRepository(Application application){
         NoteDatabase db = NoteDatabase.getInstance(application);
         noteDAO = db.noteDAO(); // Room added this method so we can call it
-        // notes = noteDAO.getAllNotesById(); // we did define this (the SQL query) so the List object will be filled
+        Log.d("DENNIS_B", "NoteRepository:NoteRepository, query on notes in repository class executed");
+        notes = noteDAO.getAllNotesById(); // we did define this (the SQL query) so the List object will be filled
     }
 
     // database operations are not allowed on the main thread for the operation may lock the UI for a long time
@@ -61,9 +62,9 @@ public class NoteRepository {
     }
 
     public LiveData<List<Note>> getAllNotesById(){
-        // return notes;
-        Log.d("DENNIS_B", "NoteRepository:getAllNotesById executed");
-        return noteDAO.getAllNotesById();
+        Log.d("DENNIS_B", "NoteRepository:getAllNotesById, returned list generated in constructor");
+        return notes;
+        //return noteDAO.getAllNotesById();
     }
 
 /*

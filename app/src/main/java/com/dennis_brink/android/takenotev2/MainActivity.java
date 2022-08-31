@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupLogo();
+
         // important
         registerActivityAddNote();
         registerActivityUpdateNote();
@@ -182,6 +184,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupLogo(){
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.tnv2_logo_padding);
+        getSupportActionBar().setTitle("Take Note");
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
 }

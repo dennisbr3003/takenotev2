@@ -18,7 +18,8 @@ public class NoteViewModel extends AndroidViewModel {
         super(application);
 
         repository = new NoteRepository(application);
-        //notes = repository.getAllNotesById();
+        Log.d("DENNIS_B", "NoteViewModel:NoteViewModel, query on notes in repository class executed");
+        notes = repository.getAllNotesById();
 
     }
 
@@ -35,8 +36,8 @@ public class NoteViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Note>> getAllNotesById(){
-        Log.d("DENNIS_B", "NoteViewModel:getAllNotesById executed");
-        return repository.getAllNotesById();
+        Log.d("DENNIS_B", "NoteViewModel:getAllNotesById, returned list generated in constructor");
+        return notes;
     }
 
 }
