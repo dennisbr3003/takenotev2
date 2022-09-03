@@ -18,7 +18,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -33,14 +36,17 @@ import java.util.List;
 // -- add note should be a fab (with image mounted like in math thingy)
 // -- icons and design
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FunctionConstants{
 
     private NoteViewModel noteViewModel;
     ActivityResultLauncher<Intent> activityResultLauncherAddNote;
     ActivityResultLauncher<Intent> activityResultLauncherUpdateNote;
 
+    FloatingActionButton fabAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.rcvNotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        fabAdd = findViewById(R.id.fabAdd);
 
         NoteAdapter adapter = new NoteAdapter();
         recyclerView.setAdapter(adapter);
@@ -68,26 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // swipe left or right to remove (delete) a note:
-        // dragDirs = 0. This means drag and drop will NOT be supported
-        // The actual action wil take place in method onSwiped()
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-                //viewHolder.getAdapterPosition(); // get the swiped card from the recyclerview
-
-                noteViewModel.delete(adapter.getNotes(viewHolder.getAdapterPosition())); // LiveData will update the recyclerview fro us
-                                                                                         // since it's monitoring the array of notes
-                Toast.makeText(getApplicationContext(), "Note deleted", Toast.LENGTH_SHORT).show();
-            }
-        }).attachToRecyclerView(recyclerView); // Attach the helper to the correct recyclerview (could be more)
-
         adapter.setOnItemClickListener(new NoteAdapter.onItemClickListener() {
             @Override
             public void onItemClick(Note note) {
@@ -95,10 +83,21 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("title", note.getTitle());
                 i.putExtra("description", note.getDescription());
                 i.putExtra("id", note.getId());
+                i.putExtra("function", UPD);
 
                 ///activityResultLauncher
                 activityResultLauncherUpdateNote.launch(i);
             }
+        });
+
+        fabAdd.setOnClickListener(view -> {
+
+            Intent i = new Intent(MainActivity.this, UpdateNoteActivity.class);
+            i.putExtra("function", ADD);
+
+            ///activityResultLauncher
+            activityResultLauncherUpdateNote.launch(i);
+
         });
 
     }
@@ -145,23 +144,36 @@ public class MainActivity extends AppCompatActivity {
         activityResultLauncherUpdateNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
+
                 int resultcode = result.getResultCode();
                 Intent data = result.getData();
 
                 if(resultcode == RESULT_OK && data != null){
+
                     String title = data.getStringExtra("title");
                     String text = data.getStringExtra("description");
+                    String function = data.getStringExtra("function");
                     int id = data.getIntExtra("id", -1);
 
-                    Log.d("DENNIS_B", "Id update " + id);
+                    Log.d("DENNIS_B", "Id " + id);
+                    Log.d("DENNIS_B", "Function " + function);
 
-                    if(id != -1){
-                        Note note = new Note(title, text);
-                        note.setId(id); // Room wil see this id already exists and execute the update
-                        noteViewModel.update(note);
+                    Note note = new Note(title, text);
+
+                    switch (function){
+                        case ADD:
+                            noteViewModel.insert(note);
+                            break;
+                        case UPD:
+                            note.setId(id);
+                            noteViewModel.update(note);
+                            break;
+                        case DEL:
+                            note.setId(id);
+                            noteViewModel.delete(note);
+                            break;
                     }
-                    //Note note = new Note(title, text);
-                    //noteViewModel.insert(note);
+
                 }
 
             }
