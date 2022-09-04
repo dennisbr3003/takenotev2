@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,10 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/note_card" >
+        tools:listitem="@layout/note_card">
 
     </androidx.recyclerview.widget.RecyclerView>
-<!--
+    <!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
@@ -43,10 +43,9 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/note_add"
+        android:scaleType="fitXY"
+        android:src="@drawable/note_add_fab"
         android:visibility="visible"
-        app:fab_progress_showBackground="false"
         app:fab_size="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
