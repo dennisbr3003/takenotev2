@@ -21,7 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+//import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -39,7 +40,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements FunctionConstants{
 
     private NoteViewModel noteViewModel;
-    ActivityResultLauncher<Intent> activityResultLauncherAddNote;
     ActivityResultLauncher<Intent> activityResultLauncherUpdateNote;
 
     FloatingActionButton fabAdd;
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
         setupLogo();
 
         // important
-        registerActivityAddNote();
         registerActivityUpdateNote();
 
         RecyclerView recyclerView = findViewById(R.id.rcvNotes);
@@ -101,44 +100,6 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
         });
 
     }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            String title = data.getStringExtra("noteTitle");
-            String text = data.getStringExtra("noteText");
-            Note note = new Note(title, text);
-            noteViewModel.insert(note);
-        }
-
-    }
-*/
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        Log.d("DENNIS_B", "menu item " + item.getItemId());
-
-        switch(item.getItemId()){
-            case R.id.top_menu:
-               Intent i = new Intent(MainActivity.this, AddNoteActivity.class);
-               //startActivityForResult(i, 1);
-               //activityResultLauncher
-                activityResultLauncherAddNote.launch(i);
-               return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
-
-        getMenuInflater().inflate(R.menu.new_menu, menu);
-        return true;
-    }
 
     public void registerActivityUpdateNote(){
         activityResultLauncherUpdateNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -174,24 +135,6 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
                             break;
                     }
 
-                }
-
-            }
-        });
-    }
-
-    public void registerActivityAddNote(){
-        activityResultLauncherAddNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                int resultcode = result.getResultCode();
-                Intent data = result.getData();
-                // data is the intent
-                if(resultcode == RESULT_OK && data != null){
-                    String title = data.getStringExtra("noteTitle");
-                    String text = data.getStringExtra("noteText");
-                    Note note = new Note(title, text);
-                    noteViewModel.insert(note);
                 }
 
             }

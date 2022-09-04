@@ -74,6 +74,11 @@ public class UpdateNoteActivity extends AppCompatActivity implements FunctionCon
         Log.d("DENNIS_B", "id : " + id);
         Log.d("DENNIS_B", "function : " + function);
 
+        if(currentTitle.equals("") || currentDescription.equals("")){
+            // empty note? do not create or update this
+            Log.d("DENNIS_B", "empty title or empty description. note will not be created");
+        }
+
         Intent i = new Intent();
         i.putExtra("title", currentTitle);
         i.putExtra("description", currentDescription);
