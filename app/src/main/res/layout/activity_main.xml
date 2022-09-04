@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@
         tools:listitem="@layout/note_card" >
 
     </androidx.recyclerview.widget.RecyclerView>
-
+<!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
@@ -30,5 +31,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         tools:ignore="SpeakableTextPresentCheck" />
+-->
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/note_add"
+        android:visibility="visible"
+        app:fab_progress_showBackground="false"
+        app:fab_size="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        fab:fab_colorNormal="@color/lightgrey"
+        fab:fab_colorPressed="@color/silver"
+        fab:fab_colorRipple="@color/gainsboro"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

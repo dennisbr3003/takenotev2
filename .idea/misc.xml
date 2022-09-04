@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable-anydpi/ic_3d_rotation.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/ic_add2.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/outline_cancel_white_24dp.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/outline_delete_outline_white_24dp.xml" value="0.261" />
+        <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/outline_save_white_24dp.xml" value="0.261" />
         <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/drawable/tnv2_logo_padding.xml" value="0.148" />
         <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/layout/activity_add_note.xml" value="0.29791666666666666" />
         <entry key="..\:/AndroidJava/Projects/TakeNotev2/app/src/main/res/layout/activity_main.xml" value="0.29791666666666666" />

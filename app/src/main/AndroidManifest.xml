@@ -18,10 +18,6 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AddNoteActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" /> <!-- absolutely mandatory for "new" startActivityForResult method: activityResultLauncherAddNote -->
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
