@@ -4,22 +4,15 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 //import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.github.clans.fab.FloatingActionButton;
@@ -143,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
 
     private void setupLogo(){
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.tnv2_logo_padding);
+        getSupportActionBar().setLogo(R.drawable.takenote_logo_white_padding);
         getSupportActionBar().setTitle("Take Note");
         getSupportActionBar().setDisplayUseLogoEnabled(true);
     }

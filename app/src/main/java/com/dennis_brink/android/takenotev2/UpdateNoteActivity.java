@@ -16,7 +16,7 @@ import android.widget.ImageView;
 public class UpdateNoteActivity extends AppCompatActivity implements FunctionConstants {
 
     EditText editTextTitleUpdate, editTextNoteUpdate;
-    ImageView imgSave, imgDelete;
+    ImageView imgSave, imgDelete, imgRecord;
     int id;
     String function;
 
@@ -36,6 +36,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements FunctionCon
         editTextNoteUpdate = findViewById(R.id.editTextNoteUpdate);
         imgSave = findViewById(R.id.imgSave);
         imgDelete = findViewById(R.id.imgDelete);
+        imgRecord = findViewById(R.id.imgRecord);
 
         getData();
         configureScreen(function);
@@ -48,7 +49,12 @@ public class UpdateNoteActivity extends AppCompatActivity implements FunctionCon
             deleteNote();
         });
 
+        imgRecord.setOnClickListener(view -> {
+            recordNote();
+        });
+
     }
+
 
     public void getData(){
         Intent i = getIntent();
@@ -62,6 +68,7 @@ public class UpdateNoteActivity extends AppCompatActivity implements FunctionCon
     private void configureScreen(String function){
         if(function.equals(ADD)){
             imgDelete.setVisibility(View.INVISIBLE);
+            imgRecord.setVisibility(View.VISIBLE);
         }
     }
 
@@ -105,6 +112,10 @@ public class UpdateNoteActivity extends AppCompatActivity implements FunctionCon
             setResult(RESULT_OK, i);
             finish();
         }
+    }
+
+    private void recordNote() {
+        Log.d("DENNIS_B", "Not implemented yet");
     }
 
     @Override
