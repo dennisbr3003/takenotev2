@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
         adapter.setOnItemClickListener(new NoteAdapter.onItemClickListener() {
             @Override
             public void onItemClick(Note note) {
-                Intent i = new Intent(MainActivity.this, UpdateNoteActivity.class);
+                Intent i = new Intent(MainActivity.this, UpsertNoteActivity.class);
                 i.putExtra("title", note.getTitle());
                 i.putExtra("description", note.getDescription());
                 i.putExtra("id", note.getId());
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements FunctionConstants
 
         fabAdd.setOnClickListener(view -> {
 
-            Intent i = new Intent(MainActivity.this, UpdateNoteActivity.class);
+            Intent i = new Intent(MainActivity.this, UpsertNoteActivity.class);
             i.putExtra("function", ADD);
 
             ///activityResultLauncher
