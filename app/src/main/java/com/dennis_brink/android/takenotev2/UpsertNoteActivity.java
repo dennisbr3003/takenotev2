@@ -23,7 +23,7 @@ import java.util.Locale;
 public class UpsertNoteActivity extends AppCompatActivity implements FunctionConstants {
 
     EditText editTextTitleUpdate, editTextNoteUpdate;
-    ImageView imgSave, imgDelete, imgRecord;
+    ImageView imgSave, imgDelete, imgRecord, imgClear;
     int id;
     String function;
     ActivityResultLauncher<Intent> activityResultLauncherSpeechToText;
@@ -45,6 +45,7 @@ public class UpsertNoteActivity extends AppCompatActivity implements FunctionCon
         imgSave = findViewById(R.id.imgSave);
         imgDelete = findViewById(R.id.imgDelete);
         imgRecord = findViewById(R.id.imgRecord);
+        imgClear = findViewById(R.id.imgClear);
 
         registerActivityResultLauncherSpeechToText();
 
@@ -63,8 +64,10 @@ public class UpsertNoteActivity extends AppCompatActivity implements FunctionCon
             recordNote();
         });
 
+        imgClear.setOnClickListener(view -> {
+            clearNote();
+        });
     }
-
 
     public void getData(){
         Intent i = getIntent();
@@ -144,23 +147,45 @@ public class UpsertNoteActivity extends AppCompatActivity implements FunctionCon
     }
 
     public void registerActivityResultLauncherSpeechToText(){
-        activityResultLauncherSpeechToText = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if(result.getResultCode() == RESULT_OK && result.getData() != null){
-                        ArrayList<String> speakResults = result.getData().getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                        Log.d("DENNIS_B", "UpsertNoteActivity.registerActivityResultLauncherSpeechToText: converted speach to text");
+        activityResultLauncherSpeechToText = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == RESULT_OK && result.getData() != null){
+                    ArrayList<String> speakResults = result.getData().getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Log.d("DENNIS_B", "UpsertNoteActivity.registerActivityResultLauncherSpeechToText: converted speech to text");
 
+                    if (editTextNoteUpdate.getText().toString().equals("")){
+                        editTextNoteUpdate.setText(speakResults.get(0));
+                    } else { // append
                         editTextNoteUpdate.setText(editTextNoteUpdate.getText().toString().trim() + " " + speakResults.get(0));
+                    }
+                    if(editTextTitleUpdate.getText().toString().equals("") && !editTextNoteUpdate.getText().toString().equals("")) {
                         // get the first three words (if possible) and use it for a title
-                        String words[] = speakResults.get(0).split("\\W+");
-                        if(editTextTitleUpdate.getText().toString().equals("")) {
-                            editTextTitleUpdate.setText(words[0] + " " + words[1] + " " + words[2]);
+                        String words[] = speakResults.get(0).split("\\W+"); //regular expression !!
+
+                        Log.d("DENNIS_B", "UpsertNoteActivity.registerActivityResultLauncherSpeechToText: found " + words.length + " words in this text");
+
+                        for(int i = 0; i<=words.length; i++){
+                            Log.d("DENNIS_B", "UpsertNoteActivity.registerActivityResultLauncherSpeechToText: i = " + i);
+                            if (i == 2){
+                                break;
+                            }
+                            if(i == 0){
+                                editTextTitleUpdate.setText(words[0]);
+                            }else{
+                                editTextTitleUpdate.setText(editTextTitleUpdate.getText().toString().trim() + " " + words[i]);
+                            }
                         }
                     }
                 }
+            }
         );
     }
+
+    private void clearNote() {
+        editTextNoteUpdate.setText("");
+        editTextTitleUpdate.setText("");
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
