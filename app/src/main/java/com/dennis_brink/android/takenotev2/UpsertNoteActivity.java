@@ -79,9 +79,8 @@ public class UpsertNoteActivity extends AppCompatActivity implements FunctionCon
     }
 
     private void configureScreen(String function){
-        if(function.equals(ADD)){
-            imgDelete.setVisibility(View.INVISIBLE);
-            imgRecord.setVisibility(View.VISIBLE);
+        if(function.equals(UPD)){
+            imgDelete.setVisibility(View.VISIBLE);
         }
     }
 
