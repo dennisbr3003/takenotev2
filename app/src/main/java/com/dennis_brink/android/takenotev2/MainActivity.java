@@ -1,5 +1,10 @@
 package com.dennis_brink.android.takenotev2;
 
+import static android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+import static android.content.res.Configuration.UI_MODE_NIGHT_NO;
+import static android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED;
+import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
